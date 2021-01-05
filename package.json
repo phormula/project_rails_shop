@@ -1,0 +1,10 @@
+{
+  "name": "rails-onlie-store",
+  "private": true,
+  "engines": {
+    "yarn": "1.7.0"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}

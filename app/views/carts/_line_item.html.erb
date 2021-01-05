@@ -1,0 +1,33 @@
+<div class="cart-header">
+	<%= link_to "", line_item_path(line_item), method: :delete, class:"close1"%>
+  <div class="cart-sec">
+    <div class="cart-item cyc">
+        <img src="<%= url_for(line_item.item.image) %>"/>
+    </div>
+		<div class="cart-item-info">
+			<h3><%= link_to line_item.item.name, item_path(line_item.item) %><span>Model No: 3578</span></h3>
+      <h4><span> </span><%= number_to_currency(line_item.item.price) %></h4>
+      <p class="qty">Qty ::
+      
+      
+      <%= bootstrap_form_tag(url: line_item_cr_path(:id => line_item), layout: :inline, method: :post) do |f| %>
+        <%=link_to line_item_path(:id => line_item) , method: :patch, class: "btn btn-danger" do %>
+          <i class="glyphicon glyphicon-minus" style="color:white;"></i>
+        <% end %>
+        <%= f.number_field :number, hide_label: true, control_col: "col-sm-3", value: line_item.quantity, class:"input-small", min:"1" %>
+        <%=link_to line_item_add_path(:id => line_item) , method: :post , class: "btn btn-success" do %>
+          <i class="glyphicon glyphicon-plus" style="color:white;"></i>
+        <% end %>
+        <%= f.primary do
+          concat content_tag(:i, nil, class: 'glyphicon glyphicon-refresh')
+        end %>
+      <% end %>
+      </p>
+		</div>
+		<div class="clearfix"></div>
+		<div class="delivery">
+			<span>Delivered in 2-3 bussiness days</span>
+			<div class="clearfix"></div>
+		</div>						
+	</div>
+</div>

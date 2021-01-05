@@ -1,0 +1,166 @@
+<% content_for :bg, "sec" %>
+</div>
+<div class="product">
+	 <div class="container">
+		 <div class="ctnt-bar cntnt">
+			 <div class="content-bar">
+				 <div class="single-page">
+					 <div class="product-head">
+						<a href="index.html">Home</a> <span>::</span>	
+						</div>
+
+						<!--//details-product-slider-->
+					 <div class="details-left-slider">
+						 <div class="grid images_3_of_2">
+						  <ul id="etalage">
+							<li>
+								<a href="optionallink.html">
+									<img class="etalage_thumb_image" src="<%= url_for(@item.image) %>" class="img-responsive" />
+									<img class="etalage_source_image" src="<%= url_for(@item.image) %>" class="img-responsive" title="" />
+								</a>
+							</li>
+							<li>
+								<img class="etalage_thumb_image" src="<%= url_for(@item.image) %>" class="img-responsive" />
+								<img class="etalage_source_image" src="<%= url_for(@item.image) %>" class="img-responsive" title="" />
+							</li>
+							<li>
+								<img class="etalage_thumb_image" src="<%= url_for(@item.image) %>" class="img-responsive"  />
+								<img class="etalage_source_image" src="<%= url_for(@item.image) %>"class="img-responsive"  />
+							</li>
+						    <li>
+								<img class="etalage_thumb_image" src="<%= url_for(@item.image) %>" class="img-responsive"  />
+								<img class="etalage_source_image" src="<%= url_for(@item.image) %>"class="img-responsive"  />
+							</li>
+						</ul>
+						</div>
+					 </div>
+					 <div class="details-left-info">
+							<h3><%= @item.name %></h3>
+								<h4>Model No: 3498</h4>
+							<h4></h4>
+							<div class="btn_form">
+								<%= button_to 'Add to Cart', line_items_path(item_id: @item),  class:"btn" if @item.inventory != 0 %>
+							</div>
+							<div class="bike-type">
+							<p><%= social_share_button_tag(@item.name) %></p>
+							</div>
+							<h5>Description  ::</h5>
+							<p class="desc">The first mechanically-propelled, two-wheeled vehicle may have been built by Kirkpatrick MacMillan, a Scottish blacksmith, in 1839, although the claim is often disputed. He is also associated with the first recorded instance of a cycling traffic offense, when a Glasgow newspaper in 1842 reported an accident in which an anonymous "gentleman from Dumfries-shire... bestride a velocipede... of ingenious design" knocked over a little girl in Glasgow and was fined five
+							The word bicycle first appeared in English print in The Daily News in 1868, to describe "Bysicles and trysicles" on the "Champs Elysées and Bois de Boulogne.</p>
+					 </div>
+					 <div class="clearfix"></div>				 	
+				  </div>
+			  </div>
+		  </div>
+		  <div class="single-bottom2">
+			  <h6>Related Products</h6>
+			 <div class="product">
+					 <div class="product-desc">
+						  <div class="product-img product-img2">
+							 <img src="<%= url_for(@item.image) %>" class="img-responsive " alt=""/>
+						 </div>
+						 <div class="prod1-desc">
+								<h5><a class="product_link" href="bicycles.html">Road Bike</a></h5>
+								<p class="product_descr"> Vivamus ante lorem, eleifend nec interdum non, ullamcorper et arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.eleifend nec interdum non, ullamcorper et arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra. </p>									
+						 </div>
+						 <div class="clearfix"></div>
+					 </div>
+					 <div class="product_price">
+							<span class="price-access">$300.51</span>								
+							<a class="button1" href="cart.html"><span>Add to cart</span></a>
+					 </div>
+						<div class="clearfix"></div>
+			 </div>
+			 <div class="product">
+					 <div class="product-desc">
+						  <div class="product-img product-img2">
+							 <img src="<%= url_for(@item.image) %>" class="img-responsive " alt=""/>
+						 </div>
+						 <div class="prod1-desc">
+								<h5><a class="product_link" href="bicycles.html">Mountain Bike</a></h5>
+								<p class="product_descr"> Vivamus ante lorem, eleifend nec interdum non, ullamcorper et arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.eleifend nec interdum non, ullamcorper et arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra. </p>									
+						 </div>
+						 <div class="clearfix"></div>
+					 </div>
+					 <div class="product_price">
+							<span class="price-access">$1500.51</span>								
+							<a class="button1" href="cart.html"><span>Add to cart</span></a>
+					 </div>
+				  <div class="clearfix"></div>
+			 </div>
+		 </div>	
+	 </div>
+</div>
+
+
+<br>
+
+<% if @item.comments != [] %>
+  <h4><a href="#" id="js-comments" data-id="<%= @item.id %>">Show Comments</a></h4>
+<% end %>
+
+<div id="js-view-comments">
+</div>
+
+<% if current_user %>
+  <%= render 'comment_form', locals: @comment %>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+$('#etalage').etalage({
+	thumb_image_width: 420,
+	thumb_image_height: 380,
+	source_image_width: 800,
+	source_image_height: 1000,
+	show_hint: true,
+	click_callback: function(image_anchor, instance_id){
+		alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+	}
+});
+  $(function() {
+    $('#js-comments').click(function(e){
+      e.preventDefault();
+      const id = $(this).data("id")
+      $.getJSON(`/items/${id}`, function(itemData) {
+        const comments = itemData['comments']
+        let commentsList = "";
+
+        comments.sort(function(a, b){
+          let dateA = new Date(a.created_at)
+          let dateB = new Date(b.created_at)
+
+          if (dateA > dateB) {
+            return -1
+          } else {
+            return 1
+          }
+        });
+
+        comments.forEach(function (commentData) {
+          const comment = new Comment(commentData);
+          commentsList += comment.buildHtml();
+        })
+
+        $('#js-view-comments').html(commentsList);
+      });
+    });
+  });
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form#new_comment').on("submit", function(event) {
+      event.preventDefault();
+      const values = $(this).serialize();
+      const posting = $.post('/comments', values);
+
+      posting.done(function(commentData) {
+        const comment = new Comment(commentData)
+        const commentFormat = comment.buildHtml();
+        $('#js-view-comments').append(commentFormat);
+        document.getElementById('submit-comment').disabled = false;
+        $('#comment_text').val('');
+      });
+    });
+  });
+</script>

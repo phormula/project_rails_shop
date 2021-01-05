@@ -1,0 +1,30 @@
+<% content_for :bg, "sec" %>
+</div>
+<div class="cart">
+	<div class="container">
+    <div class="cart-top">
+    <h1>Your Orders</h1>
+
+    <table class="table">
+  <tr>
+    <th>Order#</th>
+    <th>Order Date</th>
+    <th>Status</th>
+    <th>Amount</th>
+  </tr>
+  <% @orders.reverse.each do |order| %>
+  <tr>
+    <td><a href="/orders/<%= order.id %>"><%= order.id %></a></td>
+    <td><%= order.created_at.strftime(" Placed: %b %d, %Y") %></td>
+    <td><%= order.status %></td>
+    <td><%= number_to_currency(order.total) %></td>
+  </tr>
+  <% end %>
+</table>
+
+
+
+</div>
+</div>
+</div>
+

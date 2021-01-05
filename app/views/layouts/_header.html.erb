@@ -1,0 +1,45 @@
+	
+	  <div class="container">
+			 <div class="header">
+			       <div class="logo">
+						 <a href="/"><%= image_tag("logo.png", :alt => "logo") %></a>
+				   </div>							 
+				  <div class="top-nav">										 
+						<label class="mobile_menu" for="mobile_menu">
+						<span>Menu</span>
+						</label>
+						<input id="mobile_menu" type="checkbox">
+					   <ul class="nav">
+						  <li class="dropdown1"><a href="<%= bicycles_path %>">BICYCLES</a>
+						  </li>
+						  <li class="dropdown1"><a href="<%= parts_path %>">PARTS</a>
+						 </li>      
+						 <li class="dropdown1"><a href="<%= accessories_path %>">ACCESSORIES</a>
+						 </li>               
+						 <li class="dropdown1"><a href="<%= about_path %>">ABOUT</a>
+						 </li>
+						 <%if user_signed_in? %>
+							 <a href="<%= if current_user.cart
+								cart_path(current_user.cart)
+							else '#' end %>" class="shop">
+								  <%= image_tag("cart.png", :alt => "cart") %>
+								  <span class="label label-warning">
+								    <% count = 0 %>
+									<%
+									if current_user.cart
+									  current_user.cart.line_items.each do |item|
+									    count = count + item.quantity
+									  end
+									end
+									%>
+									<%= count %>
+								  </span>
+							</a>
+						<% end %>
+						  
+					  </ul>
+				 </div>
+				 <div class="clearfix"></div>
+			 </div>
+	  </div>	 
+	

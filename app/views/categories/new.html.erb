@@ -1,0 +1,19 @@
+<% content_for :bg, "sec" %>
+</div>
+<div class="cart">
+	<div class="container">
+    <div class="cart-top">
+    <%= render 'errors', locals: @category %>
+
+<h1>Add Category</h1>
+</br>
+
+<%= form_for(@category) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br></br>
+  <%= f.submit nil, class:"btn btn-primary" %>
+<% end %> 
+</div>
+</div>
+</div>

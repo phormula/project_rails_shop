@@ -1,0 +1,25 @@
+<% if current_user.admin %>
+  <h3><%= link_to "All Orders", admin_orders_path%></h3>
+  <h3><%= link_to "Add Item", new_item_path%></h3>
+  <h3><%= link_to "Add Category", new_category_path%></h3>
+  <h3><%= link_to "All Items", admin_items_path %><button type="button" id="js-all-items" class="btn btn-link">&or;</button></h3>
+  <div class="js-items">
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+  $(function() {
+    $('button#js-all-items').click(function (event) {
+      $.getJSON('/items_index', function (itemsData) {
+        var itemsList = "";
+        itemsData.forEach(function(itemData){
+          debugger;
+          var item = new Item(itemData)
+          itemsList+= item.buildHtml();
+        });
+        $('.js-items').html(itemsList)
+      })
+    });
+  });
+</script>

@@ -1,0 +1,20 @@
+<% @parts.each do |part| %>
+  <a href="<%= item_path(part) %>"><div class="part-sec bottom-line">				 
+  <%= image_tag(part.image, :alt => "") %>
+      <div class="part-info">
+          <a href="<%= item_path(part) %>"><h5><%= part.name %><span><%= number_to_currency(part.price) %></span></h5></a>
+          <a class="add-cart" href="<%= item_path(part) %>">Quick View</a>
+          <%= button_to 'Add to Cart', line_items_path(item_id: part),  class:"qck btn" %>
+      </div>
+  </div></a>
+<% end %>
+<% @acces.each do |acce| %>
+  <a href="<%= item_path(acce) %>"><div class="part-sec bottom-line">				 
+  <%= image_tag(acce.image, :alt => "") %>
+      <div class="part-info">
+          <a href="<%= item_path(acce) %>"><h5><%= acce.name %><span><%= number_to_currency(acce.price) %></span></h5></a>
+          <a class="add-cart" href="<%= item_path(acce) %>">Quick View</a>
+          <%= button_to 'Add to Cart', line_items_path(item_id: acce),  class:"qck btn" %>
+      </div>
+  </div></a>
+<% end %>

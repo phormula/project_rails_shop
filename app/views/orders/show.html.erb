@@ -1,0 +1,29 @@
+<% content_for :bg, "sec" %>
+</div>
+<div class="cart">
+	<div class="container">
+    <div class="cart-top">
+    <h1>Order#: <%= @order.id %></h1>
+
+</br>
+<p><%= @order.created_at.strftime("Order Placed: %b %d, %Y") %> | Status: <%= @order.status %></p>
+</br>
+
+<% @order.line_items.each do |line_item| %>
+  <p><%= link_to line_item.item.name, item_path(line_item.item) %> | <%= number_to_currency(line_item.item.price) %> | Quantity: <%= line_item.quantity %></p>
+  <% end %>
+
+
+<% if @order.address %>
+  <strong>Shipp To:</strong></br>
+  <%= @order.address.name %></br>
+  <%= @order.address.street_address %></br>
+  <%= @order.address.city %></br>
+  <%= @order.address.state %>, <%= @order.address.zipcode %></br>
+<% end %>
+
+<h3>Order total: <strong><%= number_to_currency(@order.total) %></strong> </h3>
+ 
+</div>
+</div>
+</div>

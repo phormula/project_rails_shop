@@ -1,0 +1,43 @@
+<% content_for :bg, "sec" %>
+</div>
+
+<div class="cart">
+	<div class="container">
+		<div class="cart-top">
+      <a href="<%= root_path %>">Home</a>
+      
+		</div>	
+		<% if current_user.cart %>
+		<% if @cart.line_items == [] %>
+			Your cart is empty
+			<% else %>
+      <div class="col-md-9 cart-items">
+        <h2>My Shopping Bag</h2>
+			  <%= render partial: "line_item", collection: @cart.line_items  %>
+      </div>
+		  <div class="col-md-3 cart-total">
+			  <a class="continue" href="<%= bicycles_path %>">Continue to shop</a>
+			  <div class="price-details">
+				  <h3>Price Details</h3>
+				  <span>Total</span>
+				  <span class="total"><%= number_to_currency(@cart.total) %></span>
+				  <span>Discount</span>
+				  <span class="total">---</span>
+				  <span>Delivery Charges</span>
+				  <span class="total">---</span>
+				  <div class="clearfix"></div>				 
+			  </div>	
+			  <h4 class="last-price">TOTAL</h4>
+			  <span class="total final"><%= number_to_currency(@cart.total) %></span>
+			  <div class="clearfix"></div>
+			  <%= button_to 'Checkout', new_order_path, method: :get, class: "btn btn-primary"  %>
+			  <div class="total-item">
+				  <h3>OPTIONS</h3>
+				  <h4>COUPONS</h4>
+				  <a class="cpns" href="#">Apply Coupons</a>
+			</div>
+	</div>
+</div>
+<% end %>
+<% end %>
+

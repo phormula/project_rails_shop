@@ -1,0 +1,10 @@
+<% @items.each do |item| %>
+    <a href="<%= item_path(item) %>"><div class="part-sec bottom-line">				 
+    <%= image_tag(item.image, :alt => "") %>
+        <div class="part-info">
+            <a href="<%= item_path(item) %>"><h5><%= item.name %><span><%= number_to_currency(item.price) %></span></h5></a>
+            <a class="add-cart" href="<%= item_path(item) %>">Quick View</a>
+            <%= button_to 'Add to Cart', line_items_path(item_id: item),  class:"qck btn" %>
+        </div>
+    </div></a>
+<% end %>

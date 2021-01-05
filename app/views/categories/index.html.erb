@@ -1,0 +1,35 @@
+<% content_for :bg, "sec" %>
+</div>
+<div class="cart">
+	<div class="container">
+    <div class="cart-top">
+<% @categories.each do |category| %>
+  <h2><%= link_to category.name, category_path(category)%><button type="button" class="btn btn-link" data-id="<%= category.id %>">&or;</button></h2>
+  <ul id="category-item-<%= category.id %>">
+  </ul>
+<% end %>
+
+<% if can? :create, @category %>
+  <p><%= button_to "Add New Category", new_category_path, method: :get, class:"btn btn-success" %></p>
+<% end %>
+
+<script type="text/javascript">
+  $(function(){
+    $(".btn.btn-link").on("click", function(){
+      const id = $(this).data("id");
+      $.getJSON(`/categories/${id}`, function(categoryData){
+        const items = categoryData["items"]
+        let itemsList = "";
+
+        items.forEach(function(item) {
+          itemsList+= `<li><a href="/items/${item.id}">${item.name} | $${item.price.toLocaleString()}</a></li>`;
+        });
+        $(`#category-item-${id}`).html(itemsList)
+      });
+    });
+  });
+</script>
+ 
+</div>
+</div>
+</div>

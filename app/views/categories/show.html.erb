@@ -1,0 +1,19 @@
+<% content_for :bg, "sec" %>
+</div>
+<div class="cart">
+	<div class="container">
+    <div class="cart-top">
+    <h1><%= @category.name %></h1>
+
+<% @category.items.each do |item| %>
+  <h3><%= link_to "#{item.name} | #{number_to_currency(item.price)}", item_path(item) %></h3>
+<% end %>
+
+<% if can? :create, Item %>
+  </br>
+  <div class= "btn-group"><%= button_to "New Item", new_category_item_path(@category.id), method: :get, class:"btn btn-success"%></div>
+  <div class= "btn-group"><%= button_to "Edit Category", edit_category_path(@category.id), method: :get, class: "btn btn-warning"%></div>
+<% end %> 
+</div>
+</div>
+</div>

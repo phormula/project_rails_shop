@@ -1,0 +1,21 @@
+<% content_for :bg, "sec" %>
+</div>
+<script>  
+    $(function () {
+      $("#slider").responsiveSlides({
+      	auto: false,
+      	nav: true,
+      	speed: 500,
+        namespace: "callbacks",
+        pager: true,
+      });
+    });
+  </script>
+<div class="bikes">		 
+	 <div class="mountain-sec">
+		 <h2>MOUNTAIN BIKES</h2>
+		 <%= render "pages/item" %>
+			 <div class="clearfix"></div>
+	  </div>
+		 
+</div>	  		
