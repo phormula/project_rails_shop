@@ -16,6 +16,11 @@ class PagesController < ApplicationController
 
     def about
     end
+      
+    def search
+      @find = WikiDict.where("word = ?", params[:q]).or(WikiDict.where('word LIKE ?', "#{params[:q]}%")).group("word")
+      render json: @find
+    end
     
   end
   

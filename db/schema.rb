@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_03_095920) do
+ActiveRecord::Schema.define(version: 2021_01_05_190327) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -119,6 +119,13 @@ ActiveRecord::Schema.define(version: 2021_01_03_095920) do
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid"], name: "index_users_on_uid"
+  end
+
+  create_table "wiki_dicts", force: :cascade do |t|
+    t.string "lang"
+    t.string "word"
+    t.string "part_of_speech"
+    t.text "meaning"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

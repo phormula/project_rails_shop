@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :line_items
   post 'line_items/:id/add' => 'line_items#add_quantity', as: 'line_item_add'
   post 'line_items/:id/cr' => 'line_items#update', as: 'line_item_cr'
+
+  get 'search_word/:q' => 'pages#search'
   
   resources :categories do 
     resources :items 

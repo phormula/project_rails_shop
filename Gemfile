@@ -10,6 +10,7 @@ gem 'dotenv-rails'
 gem 'omniauth-facebook'
 gem 'devise'
 gem 'rails_admin', '~> 2.0'
+gem 'twitter-typeahead-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 # Use sqlite3 as the database for Active Record

@@ -14,7 +14,35 @@
 //= require jquery
 //= require rails-ujs
 //= require turbolinks
+//= require twitter/typeahead.min
 //= require_tree .
 //= require bootstrap-table/bootstrap-table
 
-
+var uSers= new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+        url: '/search_word/%QUERY',
+        wildcard: '%QUERY',
+        cache: false
+    }
+});$(document).ready(function(){
+  
+    $('.typeahead').typeahead(null, {
+        name: 'id',
+        display: 'word',
+        source: uSers,
+        limit: 20,
+        template: function (query, item) {
+     
+            var color = "#777";
+            if (item.status === "owner") {
+                color = "#ff1493";
+            }
+     
+            return '<span class="row">' +
+                '<span class="word">{{word}} </span>' +
+            "</span>"
+        }
+       });
+      });
